@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Stéphane Bilqué
+  description: Enables or disables the Customer Experience Improvement Program (CEIP) for SQL Server
+  company: Informatique CDC
+  license: Apache
+
+  min_ansible_version: 2.6
+
+  github_branch: https://github.com/informatique-cdc/ansible-role-win_sqlserver_ceip
+
+  platforms:
+   - name: Windows
+     versions:
+      - 2016
+
+  galaxy_tags:
+    - windows
+    - sql server
+    - ceip
+    - telemetry
+
+dependencies: []
