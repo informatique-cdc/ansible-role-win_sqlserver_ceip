@@ -37,7 +37,7 @@
 
 GNU General Public License v3.0
 
-See [LICENCE](LICENCE.txt) to see the full text.
+See [LICENSE](LICENSE) to see the full text.
 
 ## Author Information
 
