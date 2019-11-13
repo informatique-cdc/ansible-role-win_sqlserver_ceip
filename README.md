@@ -35,7 +35,9 @@
 
 ## License
 
-[Apache 2](LICENCE.txt)
+GNU General Public License v3.0
+
+See [LICENCE](LICENCE.txt) to see the full text.
 
 ## Author Information
 
