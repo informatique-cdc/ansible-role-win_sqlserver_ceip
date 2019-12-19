@@ -3,7 +3,7 @@ galaxy_info:
   description: Enables or disables the Customer Experience Improvement Program (CEIP) for SQL Server.
   company: Informatique CDC
 
-  license: GPLv3
+  license: Apache
 
   min_ansible_version: 2.6
 

@@ -33,15 +33,15 @@
           state: present
 ```
 
+## Authors
+
+* [Stéphane Bilqué](https://github.com/sbilque)
+
 ## License
 
-GNU General Public License v3.0
+This project is licensed under the Apache 2.0 License.
 
-See [LICENSE](LICENSE) to see the full text.
-
-## Author Information
-
-* **Stéphane Bilqué** - [sbilque](https://github.com/sbilque)
+See the [LICENSE](LICENSE) to see the full text.
 
 ## Open Source Components
 
