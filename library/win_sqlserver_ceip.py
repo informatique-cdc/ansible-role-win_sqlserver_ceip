@@ -33,6 +33,12 @@ options:
             - Specifies the state needed for the Customer Experience Improvement Program (CEIP) for SQL Server.
         choices: [ "present", "absent" ]
         required: 'Yes'
+        type: str
+notes:
+    - This module uses some partial or full parts of open source functions in PowerShell belows.
+    - SQL Server Tips - Deactivate the Customer Experience Improvement (U(https://blog.dbi-services.com/sql-server-tips-deactivate-the-customer-experience-improvement-program-ceip/))
+    - How to turn off telemetry for SQL 2016 (U(https://stackoverflow.com/questions/43548794/how-to-turn-off-telemetry-for-sql-2016))
+
 '''
 
 EXAMPLES = r'''
