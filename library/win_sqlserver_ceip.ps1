@@ -29,32 +29,32 @@ if ($diff_mode) {
 Function Get-TargetResource {
     [OutputType([System.Collections.Hashtable])]
 
-    [array]$services = Get-Service | 
-        Where-Object { $_.Name -like '*telemetry*' -or $_.DisplayName -like '*CEIP*' } |    
-        ForEach-Object { 
-            @{
-                Name        = $_.Name
-                DisplayName = $_.DisplayName
-                StartType   = $_.StartType
-            }
+    [array]$services = Get-Service |
+    Where-Object { $_.Name -like '*telemetry*' -or $_.DisplayName -like '*CEIP*' } |
+    ForEach-Object {
+        @{
+            Name        = $_.Name
+            DisplayName = $_.DisplayName
+            StartType   = $_.StartType
         }
+    }
 
     Set-Location "HKLM:\"
-    $sqlentries = @( "\Software\Microsoft\Microsoft SQL Server\", "\Software\Wow6432Node\Microsoft\Microsoft SQL Server\" ) 
+    $sqlentries = @( "\Software\Microsoft\Microsoft SQL Server\", "\Software\Wow6432Node\Microsoft\Microsoft SQL Server\" )
 
     [array]$registry = Get-ChildItem -Path $sqlentries -Recurse -ErrorAction SilentlyContinue |
+    ForEach-Object {
+        $keypath = $_.Name
+        (Get-ItemProperty -Path $keypath).PSObject.Properties |
+        Where-Object { $_.Name -eq "CustomerFeedback" -or $_.Name -eq "EnableErrorReporting" } |
         ForEach-Object {
-            $keypath = $_.Name
-            (Get-ItemProperty -Path $keypath).PSObject.Properties |
-                Where-Object { $_.Name -eq "CustomerFeedback" -or $_.Name -eq "EnableErrorReporting" } |
-                ForEach-Object {
-                    @{
-                        Name  = $_.Name
-                        Value = Get-ItemPropertyValue -Path $keypath -Name $_.Name
-                        Path  = $keypath 
-                    }
-                }
+            @{
+                Name  = $_.Name
+                Value = Get-ItemPropertyValue -Path $keypath -Name $_.Name
+                Path  = $keypath
+            }
         }
+    }
     return @{
         Services = $services
         Registry = $registry
@@ -77,9 +77,9 @@ Function Test-TargetResource {
         $RegistryValue = 1
 
     }
-    else {   
+    else {
         $StartupType = 'Disabled'
-        $RegistryValue = 0        
+        $RegistryValue = 0
     }
 
     $IsDesiredState = $true
@@ -121,9 +121,9 @@ Function Set-TargetResource {
         $RegistryValue = 1
 
     }
-    else {   
+    else {
         $StartupType = 'Disabled'
-        $RegistryValue = 0        
+        $RegistryValue = 0
     }
 
     $CurrentState = Get-TargetResource
@@ -141,11 +141,11 @@ Function Set-TargetResource {
             $ServiceName = $_.Name
             Set-Service -Name $ServiceName -StartupType $StartupType -ErrorAction SilentlyContinue
 
-            $serviceinfo = Get-Service -Name $ServiceName 
+            $serviceinfo = Get-Service -Name $ServiceName
             if (($serviceinfo.Status -eq 'running') -and ($StartupType -eq 'Disabled')) {
                 Stop-Service -Name $ServiceName -ErrorAction SilentlyContinue
             }
-            elseif (($serviceinfo.Status -eq 'stopped') -and ($StartupType -eq 'Automatic')) { 
+            elseif (($serviceinfo.Status -eq 'stopped') -and ($StartupType -eq 'Automatic')) {
                 Start-Service -Name $ServiceName -ErrorAction SilentlyContinue
             }
         }

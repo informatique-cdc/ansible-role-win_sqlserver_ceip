@@ -20,7 +20,7 @@ DOCUMENTATION = r'''
 ---
 module: win_sqlserver_ceip
 short_description: Enables or disables the CEIP for SQL Server
-author: 
+author:
     - Stéphane Bilqué (@sbilque)
 description:
     - Ansible module to enable or disable the Customer Experience Improvement Program (CEIP) for SQL Server on Windows-based systems.
