@@ -1,4 +1,5 @@
-/.vscode/
-/.vscode/*.*
+/.vscode
+Ansible.*.cs
+Ansible.*.psm1
 /tests
 /tests/*
